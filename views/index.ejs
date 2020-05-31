@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <!-- JS, Popper.js, and jQuery -->
+    <link rel="stylesheet" href="css/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 card-container">
+          <div class="card">
+            <h1 class="card-header text-center">TODO App</h1>
+            <form action="/addTask" method="POST" id="add-task-form">
+              <div class="card-body row">
+                <div class="input-container desc col-lg-6">
+                  <label for="description" class="input-label desc-label"
+                    ><span class="label-content text-secondary"
+                      >Description</span
+                    ></label
+                  >
+                  <input
+                    type="text"
+                    name="description"
+                    placeholder="What do you need to do?"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="card-body row">
+                <div class="input-container desc col-lg-6">
+                  <select
+                    class="form-control"
+                    id="category"
+                    name="category"
+                    required
+                  >
+                    <option disabled="true" selected="true"
+                      >Choose a category</option
+                    >
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="cleaning">Cleaning</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="input-container desc col-lg-6">
+                  <label for="description" class="input-label desc-label"
+                    ><span class="label-content text-secondary"
+                      >Description</span
+                    ></label
+                  >
+                  <input
+                    type="date"
+                    name="date"
+                    placeholder="dd/mm/yyyy"
+                    required
+                  />
+                </div>
+              </div>
+            </form>
+            <div class="row justify-content-center">
+              <div class="col-lg-8 button-container">
+                <button class="btn btn-lg btn-dark" id="add-task-button">
+                  <span class="button-text text-white">Add Tasks</span>
+                </button>
+                <button class="btn btn-lg btn-danger" id="delete-task-button">
+                  <span class="button-text text-white">Delete Tasks</span>
+                </button>
+              </div>
+            </div>
+            <form action="/deleteTask" method="GET" id="delete-task-form">
+              <section class="bottom-section p-2">
+                <% for (let i=0; i < tasks.length; i++) { %>
+                <div class="row checkbox-row" data-taskId="<%= tasks[i]._id %>">
+                  <div class="task-detail">
+                    <div class="form-check mx-2">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="<%= tasks[i]._id %>"
+                        name="checkboxes"
+                        value="<%= tasks[i]._id %>"
+                      />
+                      <label class="form-check-label" for="<%= tasks[i]._id %>"
+                        >&emsp;<%= tasks[i].description %></label
+                      >
+                    </div>
+                    <div class="task-date text-secondary">
+                      <i>IC</i> <%= tasks[i].dueDate.toDateString() %>
+                    </div>
+                  </div>
+                  <div class="m-2">
+                    <button
+                      class="btn btn-dark task-category text-capitalize btn-<%= tasks[i].category %>"
+                      data-category="<%= tasks[i].category %>"
+                    >
+                      <%= tasks[i].category %>
+                    </button>
+                  </div>
+                </div>
+                <% } %>
+              </section>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"
+  ></script>
+  <script src="js/script.js"></script>
+</html>
