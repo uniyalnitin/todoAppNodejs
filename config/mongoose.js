@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/todo_db");
+mongoose.connect("mongodb://mongo/todo_db");
 
 const db = mongoose.connection;
 
